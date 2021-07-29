@@ -14,8 +14,9 @@ var strStr = function(haystack, needle) {
             while (haystack[index] === needle[count] && index < haystack.length) {
                 count++;
                 index++;
+                if (count === needle.length) return indexOfHaystack;
             }
-            if (count === needle.length) return indexOfHaystack;
+            
         } indexOfHaystack++;
     }
     
