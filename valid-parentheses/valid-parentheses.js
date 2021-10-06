@@ -3,22 +3,23 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    let correspondingBrackets = {
-        ')': '(',
+    let openParentheses = [];
+    let parentheses = {
         '}' : '{',
-        ']': '['
-    };
-    
-    let stack = [];
-    
-    for (let char of s) {
-        if (char === '(' || char === '{' || char === '[') stack.push(char);
-        else if (char === ')' || char === '}' || char === ']') {
-            if (correspondingBrackets[char] !== stack[stack.length - 1]) return false;
-            else if (correspondingBrackets[char] === stack[stack.length - 1]) stack.pop();
-        }
+        ')' : '(',
+        ']' : '['
     }
     
-    if (stack.length > 0) return false; 
-    return s.length <= 1 ? false : true;
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === '{' || s[i] === '(' || s[i] === '[') {
+            openParentheses.push(s[i])
+        } else if (s[i] === ')' || s[i] === '}' || s[i] === ']') {
+            if (openParentheses[openParentheses.length - 1] !== parentheses[s[i]]) {
+                return false;
+            } else {
+                openParentheses.pop();
+            }
+        }
+    }
+    return openParentheses.length === 0 ? true : false;
 };
