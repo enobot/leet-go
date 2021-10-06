@@ -3,21 +3,20 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-    const hashSet = new Set();
-    let longest = 0;
-    let a_pointer = 0;
-    let b_pointer = 0;
-
-    while (b_pointer < s.length) {
-        if (!hashSet.has(s[b_pointer])) {
-            hashSet.add(s[b_pointer]);
-            b_pointer++;
-            longest = Math.max(hashSet.size, longest)
+    const charSet = new Set();
+    let longestSubstring = 0;
+    let left = 0, right = 0;
+    
+    while (right < s.length) {
+        if (!charSet.has(s[right])) {
+            charSet.add(s[right]);
+            longestSubstring = Math.max(longestSubstring, charSet.size);
+            right++;
         } else {
-            hashSet.delete(s[a_pointer]);
-            a_pointer++;
+            charSet.delete(s[left]);
+            left++;
         }
     }
     
-    return longest;
+    return longestSubstring;
 };
