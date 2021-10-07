@@ -4,22 +4,22 @@
  * @return {number[][]}
  */
 var combinationSum = function(candidates, target) {
-    let totalCombinations = [];
+    const totalCombos = [];
     
-    combinationHelper(candidates, target, totalCombinations, [], 0)
-    return totalCombinations
+    findCombos(candidates, target, totalCombos, [], 0);
+    return totalCombos;
 };
 
-function combinationHelper(candidates, target, totalCombinations, combo, idx) {
+function findCombos(candidates, target, totalCombos, combo, idx) {
     if (target === 0) {
-        totalCombinations.push([...combo])
+        totalCombos.push([...combo])
     }
     
     for (let i = idx; i < candidates.length; i++) {
         if (candidates[i] <= target) {
-            combo.push(candidates[i])
-            combinationHelper(candidates, target - candidates[i], totalCombinations, combo, i);
-            combo.pop();            
+            combo.push(candidates[i]);
+            findCombos(candidates, target - candidates[i], totalCombos, combo, i);
+            combo.pop()
         }
     }
 }
