@@ -3,22 +3,22 @@
  * @return {number}
  */
 var longestConsecutive = function(nums) {
-    if (nums.length === 0) return 0;
-    let set = new Set(nums);
+    let uniqueNums = new Set(nums)
     let longestStreak = 0;
     
-    for (let num of set) {
+    for (let num of uniqueNums) {
         let currentStreak = 1;
-        let currNum = num;
-        if (set.has(currNum - 1)) continue;
+        let currentNum = num;
         
-        while (set.has(currNum + 1)) {
-            currNum++;
+        if (uniqueNums.has(num - 1)) continue;
+        
+        while (uniqueNums.has(currentNum + 1)) {
             currentStreak++;
+            currentNum++;
         }
         
-        longestStreak = Math.max(currentStreak, longestStreak);
+        longestStreak = Math.max(longestStreak, currentStreak);
     }
+    
     return longestStreak;
-
 };
