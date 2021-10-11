@@ -3,26 +3,28 @@
  * @return {number}
  */
 var numIslands = function(grid) {
-    let numberOfIslands = 0;
+    let totalIslands = 0;
+    if (grid.length === 0 || grid === null) return 0;
     
-    for (let i = 0; i < grid.length; i++) {
-        for (let j = 0; j < grid[i].length; j++) {
-            if (grid[i][j] === '1') {
-                numberOfIslands += checkIsland(grid, i, j)
-            }
+    for (let row = 0; row < grid.length; row++) {
+        for (let col = 0; col < grid[row].length; col++) {
+            totalIslands += traverseIsland(grid, row, col)
         }
     }
-    return numberOfIslands;
+    
+    return totalIslands;
 };
 
-function checkIsland(matrix, row, column) {
-    if (row < 0 || row >= matrix.length || column < 0 ||
-        column >= matrix[row].length || matrix[row][column] === '0') return 0;
-    matrix[row][column] = '0';
-    checkIsland(matrix, row + 1, column);
-    checkIsland(matrix, row - 1, column);
-    checkIsland(matrix, row, column + 1);
-    checkIsland(matrix, row, column - 1);
+function traverseIsland(grid, row, column) {
+    if (row < 0 || row >= grid.length|| column < 0 || column >= grid[row].length
+       || grid[row][column] === '0') return 0;
+    
+    grid[row][column] = '0';
+    
+    traverseIsland(grid, row + 1, column);
+    traverseIsland(grid, row - 1, column);
+    traverseIsland(grid, row, column + 1);
+    traverseIsland(grid, row, column - 1)
     
     return 1;
 }
