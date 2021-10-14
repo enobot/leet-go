@@ -4,15 +4,18 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-    let letters = {};
-    if (t.length !== s.length) return false;
+    if (s.length !== t.length) return false;
     
-    for (let char of s) {
-       letters[char] ? letters[char]++ : letters[char] = 1;
+    const anagrams = {};
+    
+    for (const char of s) {
+        if(!anagrams[char]) anagrams[char] = 1;
+        else anagrams[char]++;
     }
-    for (let char of t) {
-        if (letters[char]) letters[char]--;
-        else return false;
+    
+    for (const char of t) {
+        if(!anagrams[char]) return false;
+        anagrams[char]--;
     }
-    return true;        
+    return true;
 };
