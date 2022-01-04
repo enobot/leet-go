@@ -3,6 +3,7 @@
  * @return {number}
  */
 var removeDuplicates = function(nums) {
+    if (nums.length === 0) return 0; 
     let k = 1, pointerOne = 0, pointerTwo = 1;
     
     while (pointerTwo < nums.length) {
@@ -16,5 +17,5 @@ var removeDuplicates = function(nums) {
         }
     } 
     
-    return k === 0 ? 0 : k;
+    return k;
 }
