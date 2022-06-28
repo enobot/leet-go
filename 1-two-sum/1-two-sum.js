@@ -13,7 +13,5 @@ var twoSum = function(nums, target) {
         else indicies[nums[i]] = i;
 
     }
-    
-    return undefined;
-    
+
 };
